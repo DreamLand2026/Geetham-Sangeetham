@@ -93,20 +93,21 @@
         @media (min-width: 768px) { .section-pad { padding: 120px 0; } }
         .bg-alt { background-color: #111111; border-top: 1px solid #222; border-bottom: 1px solid #222; }
 
-  /* =========================================
-           HERO SECTION
+      /* =========================================
+           HERO SECTION FIXES
            ========================================= */
         .hero-container { 
             position: relative; 
             width: 100%; 
-            height: calc(100vh - 76px); /* Mobile default height */
+            /* Let height adapt automatically on mobile to prevent extreme cropping */
+            height: auto; 
+            aspect-ratio: 3 / 4; /* Fits most vertical mobile images well */
             overflow: hidden; 
             background: #000; 
         }
         
         @media (min-width: 768px) {
             .hero-container {
-                height: auto;
                 aspect-ratio: 16 / 9; 
                 max-height: calc(100vh - 76px); 
             }
@@ -118,8 +119,9 @@
             bottom: 0;
             left: 0;
             right: 0;
+            /* Keeps the image covering the area while centering the focal point */
             background-size: cover; 
-            -webkit-background-size: cover; /* Safari Fallback */
+            -webkit-background-size: cover;
             background-position: center center; 
             background-repeat: no-repeat;
             opacity: 0; 
@@ -132,9 +134,8 @@
         @media (max-width: 768px) {
             .hero-slide {
                 background-image: var(--bg-mobile);
-                background-position: top center; /* Keeps the image anchored to the top */
-                background-size: contain; /* Shows full image without cropping */
-                background-repeat: no-repeat;
+                /* Ensure it stays perfectly centered and visible on small screens */
+                background-position: center center; 
             }
         }
 
@@ -147,6 +148,7 @@
             background: transparent; 
             pointer-events: none; 
         }
+        
         .custom-input { background: #0d0d0d; border: 1px solid #222; color: #fff; padding: 15px; border-radius: 4px; width: 100%; font-family: 'Raleway', sans-serif; transition: 0.3s; }
         .custom-input:focus { border-color: #00E5FF; outline: none; }
 
@@ -166,7 +168,7 @@
     <nav class="fixed w-full z-50 bg-[#0d0d0d] px-4 md:px-6 py-3 flex justify-between items-center border-b border-[#222]">
         
         <a href="/" class="z-50 flex items-center space-x-3 md:space-x-5">
-           
+            
              <img 
                 src="./static/img/dle_logo.png" 
                 alt="DreamLand Entertainment"
@@ -690,7 +692,7 @@
                 <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
                     <h2 class="text-3xl md:text-5xl text-white font-bold mb-4 md:mb-6 tracking-widest oswald-text">Lineup <span class="text-[#00E5FF]">2026</span></h2>
                     <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
-                    <p class="text-[1.1rem] text-[#888888] text-sm md:text-lg">Catch up on our series of pre-events, promo shows, and the final grand evening. Mark your calendars!</p>
+                    <p class="text-[1.1rem] text-[#888888] text-sm md:text-lg">Catch up on our series of pre-events, promo shows, and the final grand evening. Mark calendars!</p>
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
