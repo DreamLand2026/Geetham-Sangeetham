@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geetham Sangeetham - DreamLand Entertainment</title>
     
+    <link rel="preload" as="image" href="./static/img/hero_img_1.jpg">
+    <link rel="preload" as="image" href="./static/img/hero_mobile1.jpg" media="(max-width: 768px)">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -38,7 +41,7 @@
             font-family: 'Raleway', sans-serif; 
             background-color: #0d0d0d; 
             color: #ffffff; 
-            -webkit-font-smoothing: antialiased; /* Safari font rendering fix */
+            -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
         .oswald-text {
@@ -53,7 +56,7 @@
             border: 1px solid var(--border-color, #222222);
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            -webkit-transform: translateZ(0); /* Safari performance fix */
+            -webkit-transform: translateZ(0);
         }
         
         .block-btn {
@@ -68,7 +71,6 @@
             color: #000;
         }
 
-        /* Safari Image Masking Bug Fix for Hover Scale */
         .safari-mask-fix {
             isolation: isolate;
             -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -77,7 +79,6 @@
             transform: translate3d(0, 0, 0);
         }
 
-        /* Outlined Square Icons */
         .sq-icon { 
             display: inline-flex; align-items: center; justify-content: center; 
             width: 48px; height: 48px; 
@@ -88,7 +89,6 @@
         .icon-secondary { border: 1px solid #FF0055; color: #FF0055; }
         .icon-tertiary { border: 1px solid #BFFF00; color: #BFFF00; }
 
-        /* Sections */
         .section-pad { padding: 80px 0; } 
         @media (min-width: 768px) { .section-pad { padding: 120px 0; } }
         .bg-alt { background-color: #111111; border-top: 1px solid #222; border-bottom: 1px solid #222; }
@@ -99,7 +99,7 @@
         .hero-container { 
             position: relative; 
             width: 100%; 
-            height: calc(100vh - 76px); /* Mobile default height */
+            height: calc(100vh - 76px);
             overflow: hidden; 
             background: #000; 
         }
@@ -119,7 +119,7 @@
             left: 0;
             right: 0;
             background-size: cover; 
-            -webkit-background-size: cover; /* Safari Fallback */
+            -webkit-background-size: cover;
             background-position: center center; 
             background-repeat: no-repeat;
             opacity: 0; 
@@ -146,11 +146,9 @@
             pointer-events: none; 
         }
         
-        /* Custom Form Inputs */
         .custom-input { background: #0d0d0d; border: 1px solid #222; color: #fff; padding: 15px; border-radius: 4px; width: 100%; font-family: 'Raleway', sans-serif; transition: 0.3s; }
         .custom-input:focus { border-color: #00E5FF; outline: none; }
 
-        /* Vertical Tabs */
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
         .tab-link { display: block; padding: 16px 20px; color: #888; font-family: 'Oswald', sans-serif; text-transform: uppercase; border-left: 3px solid transparent; transition: 0.3s; letter-spacing: 1px; border-radius: 0 4px 4px 0;}
@@ -171,17 +169,18 @@
                 src="./static/img/gs_logo.png" 
                 alt="Geetham Sangeetham"
                 class="h-8 md:h-12 w-auto object-contain"
+                fetchpriority="high"
             >
             <div class="h-6 md:h-10 w-px bg-gray-700"></div>
             <img 
                 src="./static/img/dle_logo.png" 
                 alt="DreamLand Entertainment"
                 class="h-8 md:h-12 w-auto object-contain"
+                fetchpriority="high"
             >
         </a>
         
         <div class="flex items-center space-x-6 lg:space-x-8 z-50">
-            
             <div class="hidden md:flex space-x-4 lg:space-x-6 text-[10px] lg:text-xs font-bold text-gray-400 oswald-text tracking-[0.15em] uppercase pt-1">
                 <a href="#home" class="hover:text-cyber-cyan transition">Home</a>
                 <a href="#events" class="hover:text-cyber-cyan transition">Event</a>
@@ -366,6 +365,16 @@
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Priyanka NK</h4>
                         <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
                             <p>Super Singer Star</p>
+                        </div>
+                    </div>
+
+                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#00E5FF] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/hari.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        </div>
+                        <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Hari Priya</h4>
+                        <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
+                            <p>ViralVayyari</p>
                         </div>
                     </div>
 
@@ -563,7 +572,7 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-6">
                     
-                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative border-[#00E5FF] scale-105">
+                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative border-[#00E5FF] scale-105 z-10">
                         <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#00E5FF] text-black text-[10px] md:text-xs font-black px-4 md:px-6 py-1.5 tracking-widest uppercase rounded">
                             MIP
                         </div>
@@ -572,13 +581,11 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">MIP Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">200 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">All VIP Perks</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Exclusive Meet & Greet</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-couch"></i></span> <span class="leading-tight">Individual Lounge Sofa</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closest to the Stage</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: Bag, Brochures, 2x Confectionery, 2x Savory Snacks, 2 Water Bottles</span></li>
                                 </ul>
                             </div>
                             <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-[#00E5FF] hover:bg-white text-black border border-[#00E5FF] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
@@ -593,13 +600,11 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">VVIP Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">500 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Front Row Access</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Reserved Parking</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-couch"></i></span> <span class="leading-tight">Shared Lounge Sofa</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closer to Stage</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: Brochures, 1x Confectionery, 1x Savory Snacks, 2 Water Bottles</span></li>
                                 </ul>
                             </div>
                             <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/"    target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
@@ -614,13 +619,11 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">VIP Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">1000 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Dedicated Entry Line</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Closer View Area</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-chair"></i></span> <span class="leading-tight">Cushioned Seating</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closer to Stage</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: 1x Confectionery, 2 Water Bottles</span></li>
                                 </ul>
                             </div>
                             <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
@@ -635,13 +638,11 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">Gold Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">2000 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Arena Access</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Great Acoustics</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-users"></i></span> <span class="leading-tight">Generic Audience Seating</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-tv"></i></span> <span class="leading-tight">Good Proximal Distance With LED Screen</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-bottle-water"></i></span> <span class="leading-tight">Complementary: 1 Water Bottle</span></li>
                                 </ul>
                             </div>
                             <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
@@ -656,13 +657,11 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">Silver Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">3000 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">General Admission</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Food Stalls Access</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-users"></i></span> <span class="leading-tight">Generic Audience Seating</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-eye"></i></span> <span class="leading-tight">Visible and installed with live LED display</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-bottle-water"></i></span> <span class="leading-tight">Complementary: 2 Water Bottles</span></li>
                                 </ul>
                             </div>
                             <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/"  target="_blank"  class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
@@ -702,33 +701,7 @@
                             <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold oswald-text tracking-widest"><i class="fa-solid fa-calendar mr-1 md:mr-2"></i> 23 May, 2026</div>
                         </div>
                     </div>
-                    <div class="block-panel p-3 md:p-4 hover:border-[#FF0055] transition duration-300">
-                        <div class="relative h-40 md:h-48 overflow-hidden rounded bg-black safari-mask-fix">
-                            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=400&q=80" loading="lazy" decoding="async" class="block w-full h-full object-cover transition duration-500 grayscale opacity-60">
-                        </div>
-                        <div class="pt-4 md:pt-5 text-center">
-                            <h6 class="text-gray-400 font-bold mb-1 md:mb-2 text-sm md:text-base tracking-widest oswald-text">Coming Soon</h6>
-                            <div class="text-[#FF0055] text-[10px] md:text-xs font-semibold oswald-text tracking-widest"><i class="fa-solid fa-calendar mr-1 md:mr-2"></i> TBD</div>
-                        </div>
-                    </div>
-                    <div class="block-panel p-3 md:p-4 hover:border-[#BFFF00] transition duration-300">
-                        <div class="relative h-40 md:h-48 overflow-hidden rounded bg-black safari-mask-fix">
-                            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=400&q=80" loading="lazy" decoding="async" class="block w-full h-full object-cover transition duration-500 grayscale opacity-60">
-                        </div>
-                        <div class="pt-4 md:pt-5 text-center">
-                            <h6 class="text-gray-400 font-bold mb-1 md:mb-2 text-sm md:text-base tracking-widest oswald-text">Coming Soon</h6>
-                            <div class="text-[#BFFF00] text-[10px] md:text-xs font-semibold oswald-text tracking-widest"><i class="fa-solid fa-calendar mr-1 md:mr-2"></i> TBD</div>
-                        </div>
-                    </div>
-                    <div class="block-panel p-3 md:p-4 hover:border-[#00E5FF] transition duration-300">
-                        <div class="relative h-40 md:h-48 overflow-hidden rounded bg-black safari-mask-fix">
-                            <img src="https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?auto=format&fit=crop&w=400&q=80" loading="lazy" decoding="async" class="block w-full h-full object-cover transition duration-500 grayscale opacity-60">
-                        </div>
-                        <div class="pt-4 md:pt-5 text-center">
-                            <h6 class="text-gray-400 font-bold mb-1 md:mb-2 text-sm md:text-base tracking-widest oswald-text">Coming Soon</h6>
-                            <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold oswald-text tracking-widest"><i class="fa-solid fa-calendar mr-1 md:mr-2"></i> TBD</div>
-                        </div>
-                    </div>
+                  
                 </div>
             </div>
         </section>
@@ -769,7 +742,7 @@
 
         <section id="venues" class="section-no-padding border-t border-[#222]">
             <div class="w-full h-[300px] md:h-[500px] grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-700">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15560.106437618585!2d79.1352!3d12.9135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzQ4LjYiTiA3OcKwMDgnMDYuNyJF!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://maps.google.com/maps?q=Sripuram+Main+Road,+Ariyur,+Vellore&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             
             <div class="container mx-auto px-4 max-w-6xl py-10 md:py-20 md:-mt-32 relative z-10">
@@ -803,7 +776,7 @@
                     <div class="w-full md:w-1/2 p-6 md:p-12 bg-[#151515] flex flex-col justify-center items-center text-center">
                         <h4 class="text-2xl md:text-3xl text-white font-bold mb-6 md:mb-8 tracking-widest oswald-text">Ready to experience the vibe?</h4>
                         <p class="text-gray-500 text-xs md:text-sm mb-8 leading-relaxed max-w-sm">Tap the button below to get direct navigation instructions straight to the event arena.</p>
-                        <a href="https://www.google.com/maps/place/Golden+Grounds/@12.8790229,79.1072744,17z/data=!3m1!4b1!4m6!3m5!1s0x3bad3f007228c361:0xfd0692e79d2954a3!8m2!3d12.8790229!4d79.1072744!16s%2Fg%2F11z4pm139v!5m1!1e4?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MDQxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="bg-[#00E5FF] hover:bg-white text-black px-8 md:px-10 py-4 rounded font-bold tracking-widest text-xs md:text-sm transition w-full md:w-auto oswald-text shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+                        <a href="https://maps.google.com/?q=Sripuram+Main+Road,+Ariyur,+Vellore+-+632055" target="_blank" class="bg-[#00E5FF] hover:bg-white text-black px-8 md:px-10 py-4 rounded font-bold tracking-widest text-xs md:text-sm transition w-full md:w-auto oswald-text shadow-[0_0_20px_rgba(0,229,255,0.4)]">
                             <i class="fa-solid fa-map-location-dot mr-2"></i> GET DIRECTIONS
                         </a>
                     </div>
@@ -949,19 +922,17 @@
                     if (hasStartedScroll) startAutoScroll();
                 });
 
-                // Intersection Observer for triggering auto-scroll ONLY when section is visible
                 if ('IntersectionObserver' in window) {
                     const observer = new IntersectionObserver((entries) => {
                         if (entries[0].isIntersecting && !hasStartedScroll) {
                             startAutoScroll();
                             hasStartedScroll = true;
-                            observer.disconnect(); // Only need to trigger it once
+                            observer.disconnect();
                         }
-                    }, { threshold: 0.3 }); // Trigger when 30% of the section is visible
+                    }, { threshold: 0.3 });
                     
                     observer.observe(performersSection);
                 } else {
-                    // Fallback for older browsers
                     startAutoScroll();
                     hasStartedScroll = true;
                 }
