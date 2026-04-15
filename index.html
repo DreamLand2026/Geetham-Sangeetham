@@ -93,13 +93,13 @@
         @media (min-width: 768px) { .section-pad { padding: 120px 0; } }
         .bg-alt { background-color: #111111; border-top: 1px solid #222; border-bottom: 1px solid #222; }
 
-      /* =========================================
+  /* =========================================
            HERO SECTION
            ========================================= */
         .hero-container { 
             position: relative; 
             width: 100%; 
-            height: calc(100vh - 76px);
+            height: calc(100vh - 76px); /* Mobile default height */
             overflow: hidden; 
             background: #000; 
         }
@@ -119,7 +119,7 @@
             left: 0;
             right: 0;
             background-size: cover; 
-            -webkit-background-size: cover;
+            -webkit-background-size: cover; /* Safari Fallback */
             background-position: center center; 
             background-repeat: no-repeat;
             opacity: 0; 
@@ -132,7 +132,9 @@
         @media (max-width: 768px) {
             .hero-slide {
                 background-image: var(--bg-mobile);
-                background-position: center top;
+                background-position: top center; /* Keeps the image anchored to the top */
+                background-size: contain; /* Shows full image without cropping */
+                background-repeat: no-repeat;
             }
         }
 
@@ -145,7 +147,6 @@
             background: transparent; 
             pointer-events: none; 
         }
-        
         .custom-input { background: #0d0d0d; border: 1px solid #222; color: #fff; padding: 15px; border-radius: 4px; width: 100%; font-family: 'Raleway', sans-serif; transition: 0.3s; }
         .custom-input:focus { border-color: #00E5FF; outline: none; }
 
@@ -769,7 +770,7 @@
                                 <i class="fa-solid fa-envelope text-[#BFFF00] mt-1 mr-4 md:mr-5 text-xl md:text-2xl"></i>
                                 <div>
                                     <strong class="block text-white font-bold tracking-widest oswald-text mb-1 md:mb-2 text-base md:text-lg">Email Us</strong>
-                                    <span class="text-gray-400 text-xs md:text-sm">ggdreamland26@gmail.com</span>
+                                    <span class="text-gray-400 text-xs md:text-sm">dreamlandentertainment26@gmail.com</span>
                                 </div>
                             </li>
                         </ul>
