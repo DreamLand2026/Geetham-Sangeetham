@@ -56,7 +56,7 @@
             border: 1px solid var(--border-color, #222222);
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            -webkit-transform: translateZ(0); /* Hardware acceleration for Safari */
+            -webkit-transform: translateZ(0); 
             transform: translateZ(0);
         }
         
@@ -72,7 +72,6 @@
             color: #000;
         }
 
-        /* Essential fix for border-radius + overflow hidden bugs on Safari */
         .safari-mask-fix {
             isolation: isolate;
             -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -85,7 +84,6 @@
             border-radius: inherit;
         }
 
-        /* Fix for Safari backdrop-filter failing on some versions */
         .safari-blur-fix {
             background-color: rgba(17, 17, 17, 0.8);
             -webkit-backdrop-filter: blur(24px);
@@ -94,8 +92,8 @@
 
         /* Fix for iOS 100vh scrolling issue */
         .h-screen-safe {
-            height: 100vh; /* Fallback */
-            height: 100dvh; /* Modern mobile fix */
+            height: 100vh; 
+            height: 100dvh; 
         }
 
         .sq-icon { 
@@ -176,11 +174,11 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden bg-cyber-dark w-full">
+<body class="antialiased overflow-x-hidden bg-cyber-dark w-full relative">
     
-    <nav class="fixed w-full z-50 bg-[#0d0d0d] px-4 md:px-6 py-3 flex justify-between items-center border-b border-[#222]">
+    <nav class="fixed w-full z-[60] bg-[#0d0d0d] px-4 md:px-6 py-3 flex justify-between items-center border-b border-[#222]">
         
-        <a href="/" class="z-50 flex items-center space-x-3 md:space-x-5">
+        <a href="/" class="z-[70] flex items-center space-x-3 md:space-x-5">
              <img 
                 src="./static/img/dle_logo.png" 
                 alt="DreamLand Entertainment"
@@ -196,7 +194,7 @@
             >
         </a>
         
-        <div class="flex items-center space-x-6 lg:space-x-8 z-50">
+        <div class="flex items-center space-x-6 lg:space-x-8 z-[70]">
             <div class="hidden md:flex space-x-4 lg:space-x-6 text-[10px] lg:text-xs font-bold text-gray-400 oswald-text tracking-[0.15em] uppercase pt-1">
                 <a href="#home" class="hover:text-cyber-cyan transition">Home</a>
                 <a href="#events" class="hover:text-cyber-cyan transition">Event</a>
@@ -210,12 +208,12 @@
                 <i class="fa-solid fa-ticket mr-2"></i> BOOK NOW
             </a>
             
-            <button id="mobile-menu-btn" class="md:hidden text-cyber-cyan text-3xl focus:outline-none transition p-1">
+            <button id="mobile-menu-btn" onclick="toggleMenu()" class="md:hidden text-cyber-cyan text-3xl focus:outline-none transition p-1 cursor-pointer relative z-[80]">
                 <i class="fa-solid fa-bars" id="menu-icon"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="fixed inset-0 bg-[#0d0d0d] flex-col items-center justify-center space-y-6 text-xl font-black tracking-widest hidden md:hidden z-40 h-screen-safe oswald-text">
+        <div id="mobile-menu" class="fixed inset-0 bg-[#0d0d0d] flex-col items-center justify-center space-y-6 text-xl font-black tracking-widest hidden md:hidden z-[50] h-screen-safe oswald-text pt-20">
             <a href="#home" class="hover:text-cyber-cyan transition text-white" onclick="toggleMenu()">HOME</a>
             <a href="#events" class="hover:text-cyber-cyan transition text-white" onclick="toggleMenu()">EVENT</a>
             <a href="#performers" class="hover:text-cyber-cyan transition text-white" onclick="toggleMenu()">PERFORMERS</a>
