@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geetham Sangeetham - DreamLand Entertainment</title>
     
+    <link rel="preload" as="image" href="./static/img/hero_img_1.jpg">
+    <link rel="preload" as="image" href="./static/img/mobile_hero.jpg" media="(max-width: 768px)">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -38,6 +41,8 @@
             font-family: 'Raleway', sans-serif; 
             background-color: #0d0d0d; 
             color: #ffffff; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .oswald-text {
             font-family: 'Oswald', sans-serif;
@@ -51,6 +56,7 @@
             border: 1px solid var(--border-color, #222222);
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            -webkit-transform: translateZ(0);
         }
         
         .block-btn {
@@ -65,7 +71,14 @@
             color: #000;
         }
 
-        /* Outlined Square Icons */
+        .safari-mask-fix {
+            isolation: isolate;
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+
         .sq-icon { 
             display: inline-flex; align-items: center; justify-content: center; 
             width: 48px; height: 48px; 
@@ -76,26 +89,25 @@
         .icon-secondary { border: 1px solid #FF0055; color: #FF0055; }
         .icon-tertiary { border: 1px solid #BFFF00; color: #BFFF00; }
 
-        /* Sections */
         .section-pad { padding: 80px 0; } 
         @media (min-width: 768px) { .section-pad { padding: 120px 0; } }
         .bg-alt { background-color: #111111; border-top: 1px solid #222; border-bottom: 1px solid #222; }
 
       /* =========================================
-           HERO SECTION (FULL IMAGE FIX)
+           HERO SECTION FIXES
            ========================================= */
         .hero-container { 
             position: relative; 
             width: 100%; 
-            height: calc(100vh - 76px); /* Mobile default height */
+            /* Let height adapt automatically on mobile to prevent extreme cropping */
+            height: auto; 
+            aspect-ratio: 3 / 4; /* Fits most vertical mobile images well */
             overflow: hidden; 
             background: #000; 
         }
         
         @media (min-width: 768px) {
             .hero-container {
-                /* Matches standard desktop banner proportions perfectly */
-                height: auto;
                 aspect-ratio: 16 / 9; 
                 max-height: calc(100vh - 76px); 
             }
@@ -107,8 +119,9 @@
             bottom: 0;
             left: 0;
             right: 0;
+            /* Keeps the image covering the area while centering the focal point */
             background-size: cover; 
-            /* Changed to center perfectly so the bottom is visible */
+            -webkit-background-size: cover;
             background-position: center center; 
             background-repeat: no-repeat;
             opacity: 0; 
@@ -121,7 +134,8 @@
         @media (max-width: 768px) {
             .hero-slide {
                 background-image: var(--bg-mobile);
-                background-position: center top;
+                /* Ensure it stays perfectly centered and visible on small screens */
+                background-position: center center; 
             }
         }
 
@@ -131,16 +145,13 @@
             bottom: 0;
             left: 0;
             right: 0;
-            /* Changed to transparent to show the true, clear colors of the original images */
             background: transparent; 
             pointer-events: none; 
         }
         
-        /* Custom Form Inputs */
         .custom-input { background: #0d0d0d; border: 1px solid #222; color: #fff; padding: 15px; border-radius: 4px; width: 100%; font-family: 'Raleway', sans-serif; transition: 0.3s; }
         .custom-input:focus { border-color: #00E5FF; outline: none; }
 
-        /* Vertical Tabs */
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
         .tab-link { display: block; padding: 16px 20px; color: #888; font-family: 'Oswald', sans-serif; text-transform: uppercase; border-left: 3px solid transparent; transition: 0.3s; letter-spacing: 1px; border-radius: 0 4px 4px 0;}
@@ -154,18 +165,26 @@
 </head>
 <body class="antialiased overflow-x-hidden bg-cyber-dark">
     
-    <nav class="fixed w-full z-50 bg-[#0d0d0d] px-4 md:px-6 py-4 flex justify-between items-center border-b border-[#222]">
+    <nav class="fixed w-full z-50 bg-[#0d0d0d] px-4 md:px-6 py-3 flex justify-between items-center border-b border-[#222]">
         
-        <a href="/" class="z-50 flex items-center">
+        <a href="/" class="z-50 flex items-center space-x-3 md:space-x-5">
+            
+             <img 
+                src="./static/img/dle_logo.png" 
+                alt="DreamLand Entertainment"
+                class="h-8 md:h-12 w-auto object-contain"
+                fetchpriority="high"
+            >
+            <div class="h-6 md:h-10 w-px bg-gray-700"></div>
             <img 
                 src="./static/img/gs_logo.png" 
-                alt="Logo"
-                class="h-10 md:h-14 w-auto object-contain"
+                alt="Geetham Sangeetham"
+                class="h-8 md:h-12 w-auto object-contain"
+                fetchpriority="high"
             >
         </a>
         
         <div class="flex items-center space-x-6 lg:space-x-8 z-50">
-            
             <div class="hidden md:flex space-x-4 lg:space-x-6 text-[10px] lg:text-xs font-bold text-gray-400 oswald-text tracking-[0.15em] uppercase pt-1">
                 <a href="#home" class="hover:text-cyber-cyan transition">Home</a>
                 <a href="#events" class="hover:text-cyber-cyan transition">Event</a>
@@ -175,8 +194,8 @@
                 <a href="#lineup" class="hover:text-cyber-cyan transition">Lineup</a>
             </div>
 
-            <a href="#" class="bg-cyber-cyan text-black px-5 py-2 rounded font-bold text-xs md:text-sm hover:bg-white transition oswald-text tracking-widest hidden sm:flex items-center">
-                <i class="fa-solid fa-ticket mr-2"></i> MY BOOKINGS
+            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667" class="bg-cyber-cyan text-black px-5 py-2 rounded font-bold text-xs md:text-sm hover:bg-white transition oswald-text tracking-widest hidden sm:flex items-center">
+                <i class="fa-solid fa-ticket mr-2"></i> BOOK NOW
             </a>
             
             <button id="mobile-menu-btn" class="md:hidden text-cyber-cyan text-3xl focus:outline-none transition p-1">
@@ -195,12 +214,11 @@
         </div>
     </nav>
 
-    <main class="min-h-screen pt-[76px]">
+    <main class="min-h-screen pt-[64px] md:pt-[76px]">
         
         <div id="home" class="hero-container">
-           <div class="hero-slide active" style="--bg-desktop: url('./static/img/hero_img.jpg'); --bg-mobile: url('./static/img/hero_mb1.jpg');"></div>  
-           <div class="hero-slide" style="--bg-desktop: url('./static/img/hero_img.jpg'); --bg-mobile: url('./static/img/hero_mb2.jpg');"></div>
-           <div class="hero-overlay"></div>
+           <div class="hero-slide active" style="--bg-desktop: url('./static/img/hero_img_1.jpg'); --bg-mobile: url('./static/img/mobile_hero.jpg');"></div>  
+              <div class="hero-overlay"></div>
         </div>
 
         <section id="events" class="section-pad text-center bg-alt">
@@ -246,7 +264,7 @@
                                  <div class="w-10 h-10 rounded bg-[#FF0055]/10 flex items-center justify-center border border-[#FF0055]/30">
                                      <i class="fa-solid fa-calendar text-[#FF0055]"></i>
                                  </div>
-                                 <div>
+                                 <div class="text-left">
                                      <h4 class="text-white text-sm md:text-base font-bold tracking-widest oswald-text leading-tight">23 MAY 2026</h4>
                                      <p class="text-[#888] text-[10px] md:text-xs font-semibold tracking-wider mt-1">@ 6:00 PM ONWARDS</p>
                                  </div>
@@ -255,7 +273,7 @@
                                  <div class="w-10 h-10 rounded bg-[#BFFF00]/10 flex items-center justify-center border border-[#BFFF00]/30">
                                      <i class="fa-solid fa-map-pin text-[#BFFF00]"></i>
                                  </div>
-                                 <div>
+                                 <div class="text-left">
                                      <h4 class="text-white text-sm md:text-base font-bold tracking-widest oswald-text leading-tight">GOLDEN GROUND</h4>
                                      <p class="text-[#888] text-[10px] md:text-xs font-semibold tracking-wider mt-1">VELLORE - 632055</p>
                                  </div>
@@ -271,28 +289,31 @@
             </div>
             
            <div class="container mt-10 mx-auto max-w-4xl px-4 md:px-6">
-    <h2 class="text-3xl md:text-5xl text-white font-bold mb-4 md:mb-6 tracking-widest oswald-text">Geetham Sangeetham – OG Vibe Live in Concert</h2>
-    <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
-    
-    <div class="text-[1.1rem] mb-8 md:mb-10 text-[#888888] px-2 text-sm md:text-lg leading-relaxed">
-        <p class="mb-4">
-            Get ready, Vellore! For the very first time, <span class="text-white font-semibold">Geetham Sangeetham</span> brings an electrifying musical experience to your city. Step into a night filled with nostalgia, soulful melodies, and high-energy performances by renowned artists, all coming together to celebrate the magic of music.
-        </p>
-        <p class="mb-4">
-            Set under a vibrant live stage atmosphere, this concert promises an unforgettable blend of classic hits and contemporary vibes that will keep you singing along all night.
-        </p>
-        <p class="font-bold text-cyber-cyan tracking-wider">
-            Mark your calendar – May 23, 2026.
-        </p>
-        <p class="italic mt-2">
-            An experience you don’t just watch… but feel.
-        </p>
-    </div>
-    
-    <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
-    <h5 class="text-[#00E5FF] mb-4 md:mb-6 tracking-widest text-xs md:text-sm font-bold oswald-text">Check it out</h5>
-    <span class="sq-icon icon-primary rounded-full animate-bounce mx-auto"><i class="fa-solid fa-angle-down"></i></span>
-</div>
+                <h2 class="text-3xl md:text-5xl text-white font-bold mb-4 md:mb-6 tracking-widest oswald-text">Geetham Sangeetham – OG Vibe Live in Concert</h2>
+                <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
+                
+                <div class="text-[1.1rem] mb-8 md:mb-10 text-[#888888] px-2 text-sm md:text-lg leading-relaxed">
+                    <p class="mb-4">
+                        Get ready, Vellore! For the very first time, <span class="text-white font-semibold">Geetham Sangeetham</span> brings an electrifying musical experience to your city. Step into a night filled with nostalgia, soulful melodies, and high-energy performances by renowned artists, all coming together to celebrate the magic of music.
+                    </p>
+                    <p class="mb-4">
+                        Set under a vibrant live stage atmosphere, this concert promises an unforgettable blend of classic hits and contemporary vibes that will keep you singing along all night.
+                    </p>
+                    <p class="font-bold text-cyber-cyan tracking-wider">
+                        Mark your calendar – May 23, 2026.
+                    </p>
+                    <p class="italic mt-2">
+                        An experience you don’t just watch… but feel.
+                    </p>
+                </div>
+                
+                <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
+                
+                <a href="#performers" class="inline-block hover:opacity-80 transition cursor-pointer">
+                    <h5 class="text-[#00E5FF] mb-4 md:mb-6 tracking-widest text-xs md:text-sm font-bold oswald-text">Check it out</h5>
+                    <span class="sq-icon icon-primary rounded-full animate-bounce mx-auto"><i class="fa-solid fa-angle-down"></i></span>
+                </a>
+            </div>
         </section>
 
         <section id="performers" class="section-pad text-center">
@@ -302,8 +323,8 @@
                 <div id="performers-container" class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-6 hide-scrollbar px-2 md:px-4 scroll-smooth">
                     
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#BFFF00] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/spb_charan.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/spb_charan.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">SPB Charan</h4>
                         <div class="text-[#BFFF00] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -312,8 +333,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#00E5FF] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/anuradha_sriram.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/anuradha_sriram.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Anuradha Sriram</h4>
                         <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -322,8 +343,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#FF0055] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/mano.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/mano.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Mano</h4>
                         <div class="text-[#FF0055] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -332,8 +353,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#FF0055] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/mukesh.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/mukesh.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Mukesh</h4>
                         <div class="text-[#FF0055] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -342,8 +363,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#00E5FF] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/priyanka_nk.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/priyanka_nk.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Priyanka NK</h4>
                         <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -351,9 +372,19 @@
                         </div>
                     </div>
 
+                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#00E5FF] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/hari.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        </div>
+                        <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Hari Priya</h4>
+                        <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
+                            <p>ViralVayyari</p>
+                        </div>
+                    </div>
+
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#BFFF00] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/sam_vishal.JPG" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/sam_vishal.JPG" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Sam Vishal</h4>
                         <div class="text-[#BFFF00] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -362,8 +393,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#00E5FF] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/vm_mahalingam.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/vm_mahalingam.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">VM Mahalingam</h4>
                         <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -372,8 +403,8 @@
                     </div>
                     
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#FF0055] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/priya_jerson.png" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/priya_jerson.png" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Priya Jerson</h4>
                         <div class="text-[#FF0055] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -381,19 +412,9 @@
                         </div>
                     </div>
 
-                      <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#FF0055] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
-                        </div>
-                        <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Hari Priya</h4>
-                        <div class="text-[#FF0055] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
-                            <p>Legendary Voice</p>
-                        </div>
-                    </div>
-
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#BFFF00] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/pooja_vaidhiyanathan.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/pooja_vaidhiyanathan.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Pooja Vaidhiyanathan</h4>
                         <div class="text-[#BFFF00] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -402,8 +423,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#00E5FF] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/kaushik.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/kaushik.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Kaushik</h4>
                         <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -412,8 +433,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#FF0055] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/ajay_krishna.jpg" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/ajay_krishna.jpg" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Ajay Krishna</h4>
                         <div class="text-[#FF0055] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -422,8 +443,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#BFFF00] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/kiki_anchor.JPG" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/kiki_anchor.JPG" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">KIKI Anchor</h4>
                         <div class="text-[#BFFF00] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -432,8 +453,8 @@
                     </div>
 
                     <div class="block-panel text-center pb-6 md:pb-8 border-t-4 border-[#00E5FF] min-w-[260px] md:min-w-[300px] snap-center flex-shrink-0 group">
-                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black">
-                            <img src="./static/img/mani_and_band.png" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
+                        <div class="relative h-56 md:h-64 mb-6 overflow-hidden bg-black safari-mask-fix rounded-t-lg">
+                            <img src="./static/img/mani_and_band.png" loading="lazy" decoding="async" class="block w-full h-full object-cover object-top transition duration-500 transform group-hover:scale-105">
                         </div>
                         <h4 class="text-xl md:text-2xl text-white font-bold mb-1 tracking-widest oswald-text">Mani and Band</h4>
                         <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold uppercase tracking-widest">
@@ -463,31 +484,35 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 text-center mt-6 md:mt-10">
-                    <div class="block-panel p-6 md:p-8 hover:-translate-y-2 transition duration-300">
+                    
+                    <a href="#pricing" class="block-panel block p-6 md:p-8 hover:-translate-y-2 transition duration-300">
                         <div class="sq-icon icon-primary mx-auto -mt-10 md:-mt-14 mb-4 md:mb-6 bg-[#111]"><i class="fa-solid fa-ticket"></i></div>
                         <h5 class="text-lg md:text-xl text-white font-bold mb-2 md:mb-3 tracking-widest oswald-text">TICKETS</h5>
                         <p class="text-gray-500 text-xs md:text-sm leading-relaxed">Easy online booking and secure digital passes for swift entry at the gates.</p>
-                    </div>
-                    <div class="block-panel p-6 md:p-8 hover:-translate-y-2 transition duration-300 mt-6 sm:mt-0">
+                    </a>
+                    
+                    <a href="#event-facilities" onclick="switchTab('tab-food', document.querySelectorAll('.tab-link')[1])" class="block-panel block p-6 md:p-8 hover:-translate-y-2 transition duration-300 mt-6 sm:mt-0">
                         <div class="sq-icon icon-secondary mx-auto -mt-10 md:-mt-14 mb-4 md:mb-6 bg-[#111]"><i class="fa-solid fa-utensils"></i></div>
                         <h5 class="text-lg md:text-xl text-white font-bold mb-2 md:mb-3 tracking-widest oswald-text">FOOD N DRINKS</h5>
                         <p class="text-gray-500 text-xs md:text-sm leading-relaxed">Premium food stalls and refreshing beverages available on-site all night.</p>
-                    </div>
-                    <div class="block-panel p-6 md:p-8 hover:-translate-y-2 transition duration-300 mt-6 lg:mt-0">
+                    </a>
+                    
+                    <a href="#event-facilities" onclick="switchTab('tab-parking', document.querySelectorAll('.tab-link')[2])" class="block-panel block p-6 md:p-8 hover:-translate-y-2 transition duration-300 mt-6 lg:mt-0">
                         <div class="sq-icon icon-tertiary mx-auto -mt-10 md:-mt-14 mb-4 md:mb-6 bg-[#111]"><i class="fa-solid fa-car"></i></div>
                         <h5 class="text-lg md:text-xl text-white font-bold mb-2 md:mb-3 tracking-widest oswald-text">PARKING</h5>
                         <p class="text-gray-500 text-xs md:text-sm leading-relaxed">Ample, secure parking space located right beside the main venue area.</p>
-                    </div>
-                    <div class="block-panel p-6 md:p-8 hover:-translate-y-2 transition duration-300 mt-6 lg:mt-0">
+                    </a>
+                    
+                    <a href="#performers" class="block-panel block p-6 md:p-8 hover:-translate-y-2 transition duration-300 mt-6 lg:mt-0">
                         <div class="sq-icon icon-primary mx-auto -mt-10 md:-mt-14 mb-4 md:mb-6 bg-[#111]"><i class="fa-solid fa-users"></i></div>
                         <h5 class="text-lg md:text-xl text-white font-bold mb-2 md:mb-3 tracking-widest oswald-text">INCREDIBLE CROWD</h5>
                         <p class="text-gray-500 text-xs md:text-sm leading-relaxed">Join thousands of passionate music lovers for an unforgettable celebration.</p>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
 
-    <section id="event-facilities" class="section-pad">
+    <section id="event-facilities" class="section-pad scroll-mt-20">
     <div class="container mx-auto px-4 max-w-6xl">
         <div class="flex flex-col md:flex-row block-panel p-4 md:p-8 gap-4 md:gap-10">
             <div class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-[#333] md:pr-4 pb-4 md:pb-0">
@@ -543,7 +568,7 @@
     </div>
 </section>
 
-        <section id="pricing" class="section-pad text-center">
+        <section id="pricing" class="section-pad text-center scroll-mt-10">
             <div class="container mx-auto px-4 max-w-7xl">
                 <h2 class="text-3xl md:text-5xl text-white font-bold mb-6 tracking-widest oswald-text">Pricing</h2>
                 <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
@@ -551,7 +576,7 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-6">
                     
-                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative border-[#00E5FF] scale-105">
+                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative border-[#00E5FF] scale-105 z-10">
                         <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#00E5FF] text-black text-[10px] md:text-xs font-black px-4 md:px-6 py-1.5 tracking-widest uppercase rounded">
                             MIP
                         </div>
@@ -560,16 +585,14 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">MIP Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">200 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">All VIP Perks</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Exclusive Meet & Greet</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-couch"></i></span> <span class="leading-tight">Individual Lounge Sofa</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closest to the Stage</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: Bag, Brochures, 2x Confectionery, 2x Savory Snacks, 2 Water Bottles</span></li>
                                 </ul>
                             </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/ticket-options/GGNV/10001" target="_blank" class="btn bg-[#00E5FF] hover:bg-white text-black border border-[#00E5FF] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
+                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-[#00E5FF] hover:bg-white text-black border border-[#00E5FF] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
                                 <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
                             </a>
                         </div>
@@ -581,16 +604,14 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">VVIP Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">500 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Front Row Access</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Reserved Parking</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-couch"></i></span> <span class="leading-tight">Shared Lounge Sofa</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closer to Stage</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: Brochures, 1x Confectionery, 1x Savory Snacks, 2 Water Bottles</span></li>
                                 </ul>
                             </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/ticket-options/GGNV/10001"    target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
+                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/"    target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
                                 <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
                             </a>
                         </div>
@@ -602,16 +623,14 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">VIP Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">1000 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Dedicated Entry Line</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Closer View Area</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-chair"></i></span> <span class="leading-tight">Cushioned Seating</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closer to Stage</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: 1x Confectionery, 2 Water Bottles</span></li>
                                 </ul>
                             </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/ticket-options/GGNV/10001" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
+                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
                                 <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
                             </a>
                         </div>
@@ -623,16 +642,14 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">Gold Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">2000 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Arena Access</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Great Acoustics</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-users"></i></span> <span class="leading-tight">Generic Audience Seating</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-tv"></i></span> <span class="leading-tight">Good Proximal Distance With LED Screen</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-bottle-water"></i></span> <span class="leading-tight">Complementary: 2 Water Bottles</span></li>
                                 </ul>
                             </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/ticket-options/GGNV/10001" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
+                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
                                 <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
                             </a>
                         </div>
@@ -644,16 +661,14 @@
                             <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">Silver Pass</h6>
                         </div>
                         <div class="p-4 md:p-6 flex-grow flex flex-col">
-                            <div class="mb-4 md:mb-6">
-                                <span class="inline-block border border-[#333] bg-[#0d0d0d] text-gray-300 font-bold text-[10px] md:text-xs px-3 py-1 rounded tracking-widest">3000 Tickets Total</span>
-                            </div>
-                            <div class="text-xs md:text-sm text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-2 md:space-y-3 inline-block">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">General Admission</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3"><i class="fa-solid fa-check"></i></span> <span class="leading-tight">Food Stalls Access</span></li>
+                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                                <ul class="text-left space-y-3">
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-users"></i></span> <span class="leading-tight">Generic Audience Seating</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-eye"></i></span> <span class="leading-tight">Visible and installed with live LED display</span></li>
+                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1"><i class="fa-solid fa-bottle-water"></i></span> <span class="leading-tight">Complementary: 2 Water Bottles</span></li>
                                 </ul>
                             </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/ticket-options/GGNV/10001"  target="_blank"  class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
+                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/"  target="_blank"  class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text">
                                 <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
                             </a>
                         </div>
@@ -677,46 +692,20 @@
                 <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
                     <h2 class="text-3xl md:text-5xl text-white font-bold mb-4 md:mb-6 tracking-widest oswald-text">Lineup <span class="text-[#00E5FF]">2026</span></h2>
                     <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
-                    <p class="text-[1.1rem] text-[#888888] text-sm md:text-lg">Catch up on our series of pre-events, promo shows, and the final grand evening. Mark your calendars!</p>
+                    <p class="text-[1.1rem] text-[#888888] text-sm md:text-lg">Catch up on our series of pre-events, promo shows, and the final grand evening. Mark calendars!</p>
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     <div class="block-panel p-3 md:p-4 hover:border-[#00E5FF] transition duration-300">
-                        <div class="relative h-40 md:h-48 overflow-hidden rounded bg-black">
-                            <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&w=400&q=80" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500">
+                        <div class="relative h-40 md:h-48 overflow-hidden rounded bg-black safari-mask-fix">
+                            <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&w=400&q=80" loading="lazy" decoding="async" class="block w-full h-full object-cover transition duration-500">
                         </div>
                         <div class="pt-4 md:pt-5 text-center">
                             <h6 class="text-white font-bold mb-1 md:mb-2 text-sm md:text-base tracking-widest oswald-text">Geetham Sangeetham</h6>
                             <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold oswald-text tracking-widest"><i class="fa-solid fa-calendar mr-1 md:mr-2"></i> 23 May, 2026</div>
                         </div>
                     </div>
-                    <div class="block-panel p-3 md:p-4 hover:border-[#FF0055] transition duration-300">
-                        <div class="relative h-40 md:h-48 overflow-hidden rounded bg-black">
-                            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=400&q=80" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 grayscale opacity-60">
-                        </div>
-                        <div class="pt-4 md:pt-5 text-center">
-                            <h6 class="text-gray-400 font-bold mb-1 md:mb-2 text-sm md:text-base tracking-widest oswald-text">Coming Soon</h6>
-                            <div class="text-[#FF0055] text-[10px] md:text-xs font-semibold oswald-text tracking-widest"><i class="fa-solid fa-calendar mr-1 md:mr-2"></i> TBD</div>
-                        </div>
-                    </div>
-                    <div class="block-panel p-3 md:p-4 hover:border-[#BFFF00] transition duration-300">
-                        <div class="relative h-40 md:h-48 overflow-hidden rounded bg-black">
-                            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=400&q=80" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 grayscale opacity-60">
-                        </div>
-                        <div class="pt-4 md:pt-5 text-center">
-                            <h6 class="text-gray-400 font-bold mb-1 md:mb-2 text-sm md:text-base tracking-widest oswald-text">Coming Soon</h6>
-                            <div class="text-[#BFFF00] text-[10px] md:text-xs font-semibold oswald-text tracking-widest"><i class="fa-solid fa-calendar mr-1 md:mr-2"></i> TBD</div>
-                        </div>
-                    </div>
-                    <div class="block-panel p-3 md:p-4 hover:border-[#00E5FF] transition duration-300">
-                        <div class="relative h-40 md:h-48 overflow-hidden rounded bg-black">
-                            <img src="https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?auto=format&fit=crop&w=400&q=80" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 grayscale opacity-60">
-                        </div>
-                        <div class="pt-4 md:pt-5 text-center">
-                            <h6 class="text-gray-400 font-bold mb-1 md:mb-2 text-sm md:text-base tracking-widest oswald-text">Coming Soon</h6>
-                            <div class="text-[#00E5FF] text-[10px] md:text-xs font-semibold oswald-text tracking-widest"><i class="fa-solid fa-calendar mr-1 md:mr-2"></i> TBD</div>
-                        </div>
-                    </div>
+                  
                 </div>
             </div>
         </section>
@@ -742,12 +731,13 @@
                             <span class="text-white font-bold tracking-widest oswald-text text-sm md:text-base mr-2">LEARN MORE:</span>
                             <a href="https://youtube.com/@dreamlandentertainment-26?si=exO5Zu7Z91cStB0A" target="_blank" class="w-12 h-12 rounded bg-[#151515] border border-[#333] hover:bg-[#FF0000] hover:border-[#FF0000] text-white transition flex items-center justify-center text-xl shadow-lg"><i class="fa-brands fa-youtube"></i></a>
                             <a href="https://www.facebook.com/share/1FdEZdVHNM/" target="_blank" class="w-12 h-12 rounded bg-[#151515] border border-[#333] hover:bg-[#1877F2] hover:border-[#1877F2] text-white transition flex items-center justify-center text-xl shadow-lg"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/dream_land_entertainment_?igsh=NTFmczFveGVpZG5j" target="_blank" class="w-12 h-12 rounded bg-[#151515] border border-[#333] hover:bg-[#E1306C] hover:border-[#E1306C] text-white transition flex items-center justify-center text-xl shadow-lg"><i class="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
                     
                     <div class="w-full md:w-1/2">
-                        <div class="relative rounded-lg overflow-hidden p-1">
-                            <img src="./static/img/dle_logo.png" alt="About Us Event" loading="lazy" decoding="async" class="w-full h-auto rounded object-cover">
+                        <div class="relative rounded-lg overflow-hidden p-1 safari-mask-fix">
+                            <img src="./static/img/dle_logo.png" alt="About Us Event" loading="lazy" decoding="async" class="block w-full h-auto rounded object-cover">
                         </div>
                     </div>
                 </div>
@@ -756,12 +746,12 @@
 
         <section id="venues" class="section-no-padding border-t border-[#222]">
             <div class="w-full h-[300px] md:h-[500px] grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-700">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15560.106437618585!2d79.1352!3d12.9135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzQ4LjYiTiA3OcKwMDgnMDYuNyJF!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1848.5089167458189!2d79.1048978!3d12.877772!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad3f007228c361%3A0xfd0692e79d2954a3!2sGolden%20Grounds!5e1!3m2!1sen!2sin!4v1776261527565!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             
             <div class="container mx-auto px-4 max-w-6xl py-10 md:py-20 md:-mt-32 relative z-10">
                 <div class="flex flex-col md:flex-row block-panel overflow-hidden">
-                    <div class="w-full md:w-1/3 p-6 md:p-12 border-b md:border-b-0 md:border-r border-[#222] bg-[#111]">
+                    <div class="w-full md:w-1/2 p-6 md:p-12 border-b md:border-b-0 md:border-r border-[#222] bg-[#111]">
                         <h2 class="text-2xl md:text-3xl text-white font-bold mb-6 md:mb-10 tracking-widest text-center md:text-left oswald-text">Event Location</h2>
                         <ul class="space-y-6 md:space-y-10">
                             <li class="flex items-start">
@@ -782,44 +772,17 @@
                                 <i class="fa-solid fa-envelope text-[#BFFF00] mt-1 mr-4 md:mr-5 text-xl md:text-2xl"></i>
                                 <div>
                                     <strong class="block text-white font-bold tracking-widest oswald-text mb-1 md:mb-2 text-base md:text-lg">Email Us</strong>
-                                    <span class="text-gray-400 text-xs md:text-sm">ggdreamland26@gmail.com</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa-brands fa-instagram text-[#00E5FF] mt-1 mr-4 md:mr-5 text-xl md:text-2xl"></i>
-                                <div>
-                                    <strong class="block text-white font-bold tracking-widest oswald-text mb-1 md:mb-2 text-base md:text-lg">Social Media</strong>
-                                    <a href="https://www.instagram.com/dream_land_entertainment_?igsh=NTFmczFveGVpZG5j" target="_blank" class="text-gray-400 hover:text-[#00E5FF] transition text-xs md:text-sm block">@dream_land_entertainment_</a>
+                                    <span class="text-gray-400 text-xs md:text-sm">dreamlandentertainment26@gmail.com</span>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div class="w-full md:w-2/3 p-6 md:p-12 bg-[#151515]">
-                        <h4 class="text-2xl md:text-3xl text-white font-bold mb-6 md:mb-10 tracking-widest text-center md:text-left oswald-text">Directions</h4>
-                        <form>
-                            <div class="flex flex-col md:flex-row gap-4 md:gap-6 mb-6 md:mb-8">
-                                <div class="w-full md:flex-1">
-                                    <label class="block text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 md:mb-3">Destination From:</label>
-                                    <input type="text" id="origin-input" placeholder="e.g. Vellore Fort" class="custom-input">
-                                </div>
-                                <div class="w-full md:flex-1">
-                                    <label class="block text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 md:mb-3">Via (Optional):</label>
-                                    <input type="text" class="custom-input">
-                                </div>
-                            </div>
-                            <div class="mb-6 md:mb-10">
-                                <label class="block text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-3 md:mb-4">Travel mode:</label>
-                                <div class="flex flex-wrap justify-center md:justify-start gap-4 md:gap-8 text-xs md:text-sm text-gray-300 font-semibold">
-                                    <label class="flex items-center cursor-pointer hover:text-[#00E5FF] transition"><input type="radio" name="mode" checked class="mr-2 w-3 h-3 md:w-4 md:h-4 accent-[#00E5FF]"> Driving</label>
-                                    <label class="flex items-center cursor-pointer hover:text-[#00E5FF] transition"><input type="radio" name="mode" class="mr-2 w-3 h-3 md:w-4 md:h-4 accent-[#00E5FF]"> Bicycling</label>
-                                    <label class="flex items-center cursor-pointer hover:text-[#00E5FF] transition"><input type="radio" name="mode" class="mr-2 w-3 h-3 md:w-4 md:h-4 accent-[#00E5FF]"> Transit</label>
-                                    <label class="flex items-center cursor-pointer hover:text-[#00E5FF] transition"><input type="radio" name="mode" class="mr-2 w-3 h-3 md:w-4 md:h-4 accent-[#00E5FF]"> Walking</label>
-                                </div>
-                            </div>
-                            <div class="text-center md:text-left">
-                                <button type="button" onclick="getDirections()" class="bg-[#00E5FF] hover:bg-white text-black px-8 md:px-10 py-3 md:py-4 rounded font-bold tracking-widest text-xs md:text-sm transition w-full md:w-auto oswald-text"><i class="fa-solid fa-map-marker-alt mr-2"></i> GET DIRECTIONS</button>
-                            </div>
-                        </form>
+                    <div class="w-full md:w-1/2 p-6 md:p-12 bg-[#151515] flex flex-col justify-center items-center text-center">
+                        <h4 class="text-2xl md:text-3xl text-white font-bold mb-6 md:mb-8 tracking-widest oswald-text">Ready to experience the vibe?</h4>
+                        <p class="text-gray-500 text-xs md:text-sm mb-8 leading-relaxed max-w-sm">Tap the button below to get direct navigation instructions straight to the event arena.</p>
+                        <a href="https://maps.app.goo.gl/BbS3AKqeNzYrnymx8" target="_blank" class="bg-[#00E5FF] hover:bg-white text-black px-8 md:px-10 py-4 rounded font-bold tracking-widest text-xs md:text-sm transition w-full md:w-auto oswald-text shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+                            <i class="fa-solid fa-map-location-dot mr-2"></i> GET DIRECTIONS
+                        </a>
                     </div>
                 </div>
             </div>
@@ -893,18 +856,6 @@
             }, 1000);
         }
 
-        // --- GOOGLE MAPS DIRECTIONS LOGIC ---
-        function getDirections() {
-            const originInput = document.getElementById('origin-input').value;
-            const destination = "Golden Ground, Sripuram Main Road, Ariyur, Vellore, Tamil Nadu 632055";
-            
-            let url = `http://googleusercontent.com/maps.google.com/6${encodeURIComponent(destination)}`;
-            if (originInput.trim() !== "") {
-                url += `&origin=${encodeURIComponent(originInput)}`;
-            }
-            window.open(url, '_blank');
-        }
-
         // --- VERTICAL TABS LOGIC ---
         function switchTab(tabId, elem) {
             document.querySelectorAll('.tab-content').forEach(tab => {
@@ -914,7 +865,7 @@
                 btn.classList.remove('active');
             });
             document.getElementById(tabId).classList.add('active');
-            elem.classList.add('active');
+            if(elem) elem.classList.add('active');
         }
 
         // --- DOM LOAD EVENTS (Performers Slider & Hero Slider) ---
@@ -975,19 +926,17 @@
                     if (hasStartedScroll) startAutoScroll();
                 });
 
-                // Intersection Observer for triggering auto-scroll ONLY when section is visible
                 if ('IntersectionObserver' in window) {
                     const observer = new IntersectionObserver((entries) => {
                         if (entries[0].isIntersecting && !hasStartedScroll) {
                             startAutoScroll();
                             hasStartedScroll = true;
-                            observer.disconnect(); // Only need to trigger it once
+                            observer.disconnect();
                         }
-                    }, { threshold: 0.3 }); // Trigger when 30% of the section is visible
+                    }, { threshold: 0.3 });
                     
                     observer.observe(performersSection);
                 } else {
-                    // Fallback for older browsers
                     startAutoScroll();
                     hasStartedScroll = true;
                 }
