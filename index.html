@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Geetham Sangeetham - DreamLand Entertainment</title>
     
-    <link rel="preload" as="image" href="./static/img/hero_img_1.jpg">
+    <link rel="preload" as="image" href="./static/img/hero_img.jpg">
     <link rel="preload" as="image" href="./static/img/mobile_hero.jpg" media="(max-width: 768px)">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,7 +115,8 @@
            ========================================= */
         .hero-container { 
             position: relative; 
-            width: 100%; 
+            width: 100vw; /* Maps directly to Viewport Width */
+            max-width: 100%;
             height: auto; 
             aspect-ratio: 3 / 4; 
             overflow: hidden; 
@@ -125,9 +126,8 @@
         
         @media (min-width: 768px) {
             .hero-container {
-                width: 100%;
-                height: calc(100vh - 76px); 
-                aspect-ratio: auto;
+                /* Scales height automatically based on screen width to prevent cropping */
+                aspect-ratio: 16 / 7.5; 
             }
         }
         
@@ -139,28 +139,27 @@
             right: 0;
             background-size: cover; 
             -webkit-background-size: cover;
-            background-position: center center; 
+            background-position: top center; /* Keeps the title text aligned to the top */
             background-repeat: no-repeat;
             opacity: 0; 
             transition: opacity 1.5s ease; 
             background-image: var(--bg-desktop);
         }
         
-        .hero-slide.active { opacity: 1; }
-
-        /* DESKTOP ONLY: Fixes clipping by containing the image fully */
         @media (min-width: 768px) {
             .hero-slide {
-                background-size: contain; /* Show the entire poster without cropping */
-                background-position: center; /* Center it nicely */
-                /* Removed transform: scale to stop edge cropping */
+                /* Ensures the background image perfectly spans 100% of the width */
+                background-size: 100% auto; 
             }
         }
+
+        .hero-slide.active { opacity: 1; }
         
         @media (max-width: 768px) {
             .hero-slide {
                 background-image: var(--bg-mobile);
                 background-position: center center; 
+                background-size: cover;
             }
         }
 
@@ -238,7 +237,7 @@
     <main class="min-h-screen pt-[64px] md:pt-[76px] w-full">
         
         <div id="home" class="hero-container">
-           <div class="hero-slide active" style="--bg-desktop: url('./static/img/hero_img_1.jpg'); --bg-mobile: url('./static/img/mobile_hero.jpg');"></div>  
+           <div class="hero-slide active" style="--bg-desktop: url('./static/img/hero_img.jpg'); --bg-mobile: url('./static/img/mobile_hero.jpg');"></div>  
               <div class="hero-overlay"></div>
         </div>
 
