@@ -119,13 +119,15 @@
             height: auto; 
             aspect-ratio: 3 / 4; 
             overflow: hidden; 
-            background: #000; 
+            background: #000;
+            z-index: 10;
         }
         
         @media (min-width: 768px) {
             .hero-container {
-                aspect-ratio: 16 / 9; 
-                max-height: calc(100vh - 76px); 
+                width: 100%;
+                height: calc(100vh - 76px); 
+                aspect-ratio: auto;
             }
         }
         
@@ -141,10 +143,19 @@
             background-repeat: no-repeat;
             opacity: 0; 
             transition: opacity 1.5s ease; 
-            transform: scale(1.02); 
             background-image: var(--bg-desktop);
         }
-        .hero-slide.active { opacity: 1; transform: scale(1); }
+        
+        .hero-slide.active { opacity: 1; }
+
+        /* DESKTOP ONLY: Fixes clipping by containing the image fully */
+        @media (min-width: 768px) {
+            .hero-slide {
+                background-size: contain; /* Show the entire poster without cropping */
+                background-position: center; /* Center it nicely */
+                /* Removed transform: scale to stop edge cropping */
+            }
+        }
         
         @media (max-width: 768px) {
             .hero-slide {
@@ -176,9 +187,9 @@
 </head>
 <body class="antialiased overflow-x-hidden bg-cyber-dark w-full relative">
     
-    <nav class="fixed w-full z-[60] bg-[#0d0d0d] px-4 md:px-6 py-3 flex justify-between items-center border-b border-[#222]">
+    <nav class="fixed top-0 left-0 w-full z-[100] bg-[#0d0d0d] px-4 md:px-6 py-3 flex justify-between items-center border-b border-[#222]">
         
-        <a href="/" class="z-[70] flex items-center space-x-3 md:space-x-5">
+        <a href="/" class="z-[110] flex items-center space-x-3 md:space-x-5">
              <img 
                 src="./static/img/dle_logo.png" 
                 alt="DreamLand Entertainment"
@@ -194,7 +205,7 @@
             >
         </a>
         
-        <div class="flex items-center space-x-6 lg:space-x-8 z-[70]">
+        <div class="flex items-center space-x-6 lg:space-x-8 z-[110]">
             <div class="hidden md:flex space-x-4 lg:space-x-6 text-[10px] lg:text-xs font-bold text-gray-400 oswald-text tracking-[0.15em] uppercase pt-1">
                 <a href="#home" class="hover:text-cyber-cyan transition">Home</a>
                 <a href="#events" class="hover:text-cyber-cyan transition">Event</a>
@@ -208,12 +219,12 @@
                 <i class="fa-solid fa-ticket mr-2"></i> BOOK NOW
             </a>
             
-            <button id="mobile-menu-btn" onclick="toggleMenu()" class="md:hidden text-cyber-cyan text-3xl focus:outline-none transition p-1 cursor-pointer relative z-[80]">
+            <button id="mobile-menu-btn" onclick="toggleMenu()" class="md:hidden text-cyber-cyan text-3xl focus:outline-none transition p-1 cursor-pointer relative z-[120]">
                 <i class="fa-solid fa-bars" id="menu-icon"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="fixed inset-0 bg-[#0d0d0d] flex-col items-center justify-center space-y-6 text-xl font-black tracking-widest hidden md:hidden z-[50] h-screen-safe oswald-text pt-20">
+        <div id="mobile-menu" class="fixed inset-0 bg-[#0d0d0d] flex-col items-center justify-center space-y-6 text-xl font-black tracking-widest hidden md:hidden z-[90] h-screen-safe oswald-text pt-20">
             <a href="#home" class="hover:text-cyber-cyan transition text-white" onclick="toggleMenu()">HOME</a>
             <a href="#events" class="hover:text-cyber-cyan transition text-white" onclick="toggleMenu()">EVENT</a>
             <a href="#performers" class="hover:text-cyber-cyan transition text-white" onclick="toggleMenu()">PERFORMERS</a>
