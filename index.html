@@ -90,7 +90,6 @@
             backdrop-filter: blur(24px);
         }
 
-        /* Fix for iOS 100vh scrolling issue */
         .h-screen-safe {
             height: 100vh; 
             height: 100dvh; 
@@ -110,67 +109,42 @@
         @media (min-width: 768px) { .section-pad { padding: 120px 0; } }
         .bg-alt { background-color: #111111; border-top: 1px solid #222; border-bottom: 1px solid #222; }
 
-      /* =========================================
-           HERO SECTION FIXES
+        /* =========================================
+           HERO SECTION FIXES (Updated for Safari & Aspect Ratio)
            ========================================= */
         .hero-container { 
-            position: relative; 
-            width: 100vw; /* Maps directly to Viewport Width */
-            max-width: 100%;
-            height: auto; 
-            aspect-ratio: 3 / 4; 
-            overflow: hidden; 
+            display: grid; /* Uses Grid to stack slides perfectly without absolute positioning bugs */
+            width: 100%; /* Avoids 100vw which causes horizontal scrollbars */
             background: #000;
             z-index: 10;
         }
         
-        @media (min-width: 768px) {
-            .hero-container {
-                /* Scales height automatically based on screen width to prevent cropping */
-                aspect-ratio: 16 / 7.5; 
-            }
-        }
-        
         .hero-slide { 
-            position: absolute; 
-            top: 0; 
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-size: cover; 
-            -webkit-background-size: cover;
-            background-position: top center; /* Keeps the title text aligned to the top */
-            background-repeat: no-repeat;
+            grid-area: 1 / 1; /* All slides occupy the exact same grid space */
+            width: 100%;
+            height: auto; 
             opacity: 0; 
             transition: opacity 1.5s ease; 
-            background-image: var(--bg-desktop);
-        }
-        
-        @media (min-width: 768px) {
-            .hero-slide {
-                /* Ensures the background image perfectly spans 100% of the width */
-                background-size: 100% auto; 
-            }
         }
 
-        .hero-slide.active { opacity: 1; }
-        
-        @media (max-width: 768px) {
-            .hero-slide {
-                background-image: var(--bg-mobile);
-                background-position: center center; 
-                background-size: cover;
-            }
+        .hero-slide.active { 
+            opacity: 1; 
+            z-index: 2;
         }
 
-       .hero-overlay { 
-            position: absolute; 
-            top: 0; 
-            bottom: 0;
-            left: 0;
-            right: 0;
+        /* Forces the image to define the container height natively */
+        .hero-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain; /* Ensures zero cropping */
+        }
+
+        .hero-overlay { 
+            grid-area: 1 / 1; /* Stacks directly over the slides */
             background: transparent; 
             pointer-events: none; 
+            z-index: 5;
         }
 
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
@@ -237,8 +211,13 @@
     <main class="min-h-screen pt-[64px] md:pt-[76px] w-full">
         
         <div id="home" class="hero-container">
-           <div class="hero-slide active" style="--bg-desktop: url('./static/img/hero_img.jpg'); --bg-mobile: url('./static/img/mobile_hero.jpg');"></div>  
-              <div class="hero-overlay"></div>
+            <div class="hero-slide active">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="./static/img/mobile_hero.jpg">
+                    <img src="./static/img/hero_img.jpg" alt="Geetham Sangeetham Event" loading="eager">
+                </picture>
+            </div>
+            <div class="hero-overlay"></div>
         </div>
 
         <section id="events" class="section-pad text-center bg-alt w-full">
