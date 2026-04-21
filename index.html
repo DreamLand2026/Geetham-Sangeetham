@@ -48,9 +48,7 @@
             font-family: 'Oswald', sans-serif;
         }
 
-        /* =========================================
-           PAGE SPECIFIC CSS & SAFARI FIXES
-           ========================================= */
+      
         .block-panel {
             background-color: var(--bg-card, #151515);
             border: 1px solid var(--border-color, #222222);
@@ -109,18 +107,16 @@
         @media (min-width: 768px) { .section-pad { padding: 120px 0; } }
         .bg-alt { background-color: #111111; border-top: 1px solid #222; border-bottom: 1px solid #222; }
 
-        /* =========================================
-           HERO SECTION FIXES (Updated for Safari & Aspect Ratio)
-           ========================================= */
+      
         .hero-container { 
-            display: grid; /* Uses Grid to stack slides perfectly without absolute positioning bugs */
-            width: 100%; /* Avoids 100vw which causes horizontal scrollbars */
+            display: grid; 
+            width: 100%; 
             background: #000;
             z-index: 10;
         }
         
         .hero-slide { 
-            grid-area: 1 / 1; /* All slides occupy the exact same grid space */
+            grid-area: 1 / 1; 
             width: 100%;
             height: auto; 
             opacity: 0; 
@@ -132,16 +128,16 @@
             z-index: 2;
         }
 
-        /* Forces the image to define the container height natively */
+
         .hero-slide img {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: contain; /* Ensures zero cropping */
+            object-fit: contain; 
         }
 
         .hero-overlay { 
-            grid-area: 1 / 1; /* Stacks directly over the slides */
+            grid-area: 1 / 1; 
             background: transparent; 
             pointer-events: none; 
             z-index: 5;
@@ -571,115 +567,85 @@
     </div>
 </section>
 
-        <section id="pricing" class="section-pad text-center scroll-mt-10 w-full">
-            <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
-                <h2 class="text-3xl md:text-5xl text-white font-bold mb-6 tracking-widest oswald-text">Pricing</h2>
-                <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
-                <p class="text-[1.1rem] text-[#888888] max-w-2xl mx-auto mb-10 md:mb-16 text-sm md:text-lg">Choose the perfect pass for your Sangeetham experience. Secure your spot before they sell out.</p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-6">
-                    
-                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative border-[#00E5FF] md:scale-105 z-10 w-full">
-                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#00E5FF] text-black text-[10px] md:text-xs font-black px-4 md:px-6 py-1.5 tracking-widest uppercase rounded">
-                            MIP
-                        </div>
-                        <div class="p-6 md:p-8 border-b border-[#222] bg-[#111] rounded-t-lg">
-                            <h2 class="text-3xl lg:text-4xl text-white font-bold mb-2 md:mb-3 oswald-text"><sup>₹</sup>10,000</h2>
-                            <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">MIP Pass</h6>
-                        </div>
-                        <div class="p-4 md:p-6 flex-grow flex flex-col h-full">
-                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-3">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-couch"></i></span> <span class="leading-tight">Individual Lounge Sofa</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closest to the Stage</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: Bag, Brochures, 2x Confectionery, 2x Savory Snacks, 2 Water Bottles</span></li>
-                                </ul>
-                            </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-[#00E5FF] hover:bg-white text-black border border-[#00E5FF] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text mt-auto">
-                                <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative w-full">
-                        <div class="p-6 md:p-8 border-b border-[#222] bg-[#111] rounded-t-lg">
-                            <h2 class="text-3xl lg:text-4xl text-white font-bold mb-2 md:mb-3 oswald-text"><sup>₹</sup>5,000</h2>
-                            <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">VVIP Pass</h6>
-                        </div>
-                        <div class="p-4 md:p-6 flex-grow flex flex-col h-full">
-                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-3">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-couch"></i></span> <span class="leading-tight">Shared Lounge Sofa</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closer to Stage</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: Brochures, 1x Confectionery, 1x Savory Snacks, 2 Water Bottles</span></li>
-                                </ul>
-                            </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text mt-auto">
-                                <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative w-full">
-                        <div class="p-6 md:p-8 border-b border-[#222] bg-[#111] rounded-t-lg">
-                            <h2 class="text-3xl lg:text-4xl text-white font-bold mb-2 md:mb-3 oswald-text"><sup>₹</sup>2,500</h2>
-                            <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">VIP Pass</h6>
-                        </div>
-                        <div class="p-4 md:p-6 flex-grow flex flex-col h-full">
-                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-3">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-chair"></i></span> <span class="leading-tight">Cushioned Seating</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closer to Stage</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper: 1x Confectionery, 2 Water Bottles</span></li>
-                                </ul>
-                            </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text mt-auto">
-                                <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative w-full">
-                        <div class="p-6 md:p-8 border-b border-[#222] bg-[#111] rounded-t-lg">
-                            <h2 class="text-3xl lg:text-4xl text-white font-bold mb-2 md:mb-3 oswald-text"><sup>₹</sup>1,000</h2>
-                            <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">Gold Pass</h6>
-                        </div>
-                        <div class="p-4 md:p-6 flex-grow flex flex-col h-full">
-                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-3">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-users"></i></span> <span class="leading-tight">Generic Audience Seating</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-tv"></i></span> <span class="leading-tight">Good Proximal Distance With LED Screen</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-bottle-water"></i></span> <span class="leading-tight">Complementary: 2 Water Bottles</span></li>
-                                </ul>
-                            </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text mt-auto">
-                                <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative w-full">
-                        <div class="p-6 md:p-8 border-b border-[#222] bg-[#111] rounded-t-lg">
-                            <h2 class="text-3xl lg:text-4xl text-white font-bold mb-2 md:mb-3 oswald-text"><sup>₹</sup>500</h2>
-                            <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">Silver Pass</h6>
-                        </div>
-                        <div class="p-4 md:p-6 flex-grow flex flex-col h-full">
-                            <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
-                                <ul class="text-left space-y-3">
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-users"></i></span> <span class="leading-tight">Generic Audience Seating</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-eye"></i></span> <span class="leading-tight">Visible and installed with live LED display</span></li>
-                                    <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-bottle-water"></i></span> <span class="leading-tight">Complementary: 2 Water Bottles</span></li>
-                                </ul>
-                            </div>
-                            <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/"  target="_blank"  class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text mt-auto">
-                                <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
-                            </a>
-                        </div>
-                    </div>
 
+      <section id="pricing" class="section-pad text-center scroll-mt-10 w-full">
+    <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+        <h2 class="text-3xl md:text-5xl text-white font-bold mb-6 tracking-widest oswald-text">Pricing</h2>
+        <hr class="border-[#333] w-24 mx-auto mb-6 md:mb-8">
+        <p class="text-[1.1rem] text-[#888888] max-w-2xl mx-auto mb-10 md:mb-16 text-sm md:text-lg">Choose the perfect pass for your Sangeetham experience. Secure your spot before they sell out.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative w-full">
+                <div class="p-6 md:p-8 border-b border-[#222] bg-[#111] rounded-t-lg">
+                    <h2 class="text-3xl lg:text-4xl text-white font-bold mb-2 md:mb-3 oswald-text"><sup>₹</sup>5,000</h2>
+                    <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">VVIP Pass</h6>
+                </div>
+                <div class="p-4 md:p-6 flex-grow flex flex-col h-full">
+                    <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                        <ul class="text-left space-y-3">
+                            <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-couch"></i></span> <span class="leading-tight">Shared Lounge Sofa</span></li>
+                            <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closer to Stage</span></li>
+                            <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-gift"></i></span> <span class="leading-tight">Hamper bag</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text mt-auto">
+                        <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
+                    </a>
                 </div>
             </div>
-        </section>
+
+            <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative w-full">
+                <div class="p-6 md:p-8 border-b border-[#222] bg-[#111] rounded-t-lg">
+                    <h2 class="text-3xl lg:text-4xl text-white font-bold mb-2 md:mb-3 oswald-text"><sup>₹</sup>2,500</h2>
+                    <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">VIP Pass</h6>
+                </div>
+                <div class="p-4 md:p-6 flex-grow flex flex-col h-full">
+                    <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                        <ul class="text-left space-y-3">
+                            <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-chair"></i></span> <span class="leading-tight">Cushioned Seating</span></li>
+                            <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-location-crosshairs"></i></span> <span class="leading-tight">Closer to Stage</span></li>
+                         <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-bottle-water"></i></span> <span class="leading-tight">complimentary water bottle</span></li>
+                          
+                        </ul>
+                    </div>
+                    <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text mt-auto">
+                        <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
+                    </a>
+                </div>
+            </div>
+
+            <div class="block-panel text-center flex flex-col hover:-translate-y-2 transition duration-500 relative w-full">
+                <div class="p-6 md:p-8 border-b border-[#222] bg-[#111] rounded-t-lg">
+                    <h2 class="text-3xl lg:text-4xl text-white font-bold mb-2 md:mb-3 oswald-text"><sup>₹</sup>1,000</h2>
+                    <h6 class="text-[#00E5FF] font-bold tracking-widest text-xs md:text-sm oswald-text">Gold Pass</h6>
+                </div>
+                <div class="p-4 md:p-6 flex-grow flex flex-col h-full">
+                    <div class="text-[11px] md:text-xs text-gray-400 font-medium flex-grow mb-6 md:mb-8">
+                        <ul class="text-left space-y-3">
+                            <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-users"></i></span> <span class="leading-tight">Generic Audience Seating</span></li>
+                            <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-tv"></i></span> <span class="leading-tight">Good Proximal Distance With LED Screen</span></li>
+                            <li class="flex items-start"><span class="text-[#00E5FF] mr-3 mt-1 flex-shrink-0"><i class="fa-solid fa-bottle-water"></i></span> <span class="leading-tight">complimentary water bottle</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://in.bookmyshow.com/events/geetham-sangeetham/ET00494667/" target="_blank" class="btn bg-transparent border border-[#444] text-white hover:bg-[#333] px-4 py-3 rounded font-bold tracking-widest text-[10px] md:text-xs w-full transition block oswald-text mt-auto">
+                        <i class="fa-brands fa-accessible-icon mr-2"></i> BOOK NOW
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
 
         <section id="sponsors" class="section-pad text-center bg-[#111] border-t border-[#222] w-full">
             <div class="container mx-auto px-4 max-w-6xl">
